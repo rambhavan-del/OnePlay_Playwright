@@ -1,0 +1,22 @@
+{
+  "name": "oneplay_fe_automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test:qa": "cross-env ENV=qa npx playwright test",
+    "test:dev": "cross-env ENV=dev npx playwright test",
+    "test:prod": "cross-env ENV=prod npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.23",
+    "allure-js-commons": "^3.2.2",
+    "allure-playwright": "^3.2.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.5.0"
+  }
+}
