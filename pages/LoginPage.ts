@@ -7,7 +7,7 @@ import ENV from '../utils/env';
 import ENDPOINT from '../utils/endpoints';
 
 export class LoginPage {
-  constructor(public page: Page) {}
+  constructor(private page: Page) {}
 
   get offerPopUp() {
     return this.page.locator(`//*[@class='offer-popup']`);
