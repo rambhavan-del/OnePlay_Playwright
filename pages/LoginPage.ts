@@ -41,6 +41,14 @@ export class LoginPage {
     return this.page.locator(`.otpInputField`);
   }
 
+  get passwordField(){
+    return this.page.locator(`//input[@name='password']`);
+  }
+
+  get continueCTA(){
+    return this.page.locator(`//button[text()='Continue']`);
+  }
+
   async verifyBannerPopup() {
   await step('Verify and close banner popup if visible', async () => {
     if (await ActionHelper.isVisible(this.offerPopUp)) {
@@ -55,11 +63,20 @@ export class LoginPage {
 
 
   async login() {
-    await ActionHelper.click(this.loginBtn, 'Click Sign In button');
-    await ActionHelper.type(this.mobileNumberField, testData.mobileNumber, 'Enter mobile number');
+  await ActionHelper.click(this.loginBtn, 'Click Sign In button');
+  await ActionHelper.type(this.mobileNumberField, testData.mobileNumber, 'Enter mobile number');
+
+  if (process.env.ENV === 'qa') {
     await ActionHelper.click(this.getOtpCTA, 'Click Get OTP');
-    await ActionHelper.fillOtpFields(this.otpInputField, testData.OTP, 'Enter OTP digits'); 
+    await ActionHelper.fillOtpFields(this.otpInputField, testData.OTP, 'Enter OTP digits');
+  } else if (process.env.ENV === 'prod') {
+    await ActionHelper.type(this.passwordField, testData.password, 'Enter password');
+    await ActionHelper.click(this.continueCTA, 'Click Continue with Password');
+  } else {
+    throw new Error(`Unsupported ENV: ${process.env.ENV}. Expected 'qa' or 'prod'.`);
   }
+}
+
 
   async validateImageElements() {
     await step('Validate all carousel images', async () => {
@@ -180,14 +197,14 @@ export class LoginPage {
 
       // Step 1: Verify the section heading is visible
       await step(`Verify section heading '${sectionTitle}' is visible`, async () => {
-        const section = this.page.locator(`//span[normalize-space(text())='${sectionTitle}' and contains(@class,'heading-text')]`).first();
+        const section = this.page.locator(`//span[normalize-space(text())="${sectionTitle}" and contains(@class,'heading-text')]`).first();
         await expect(section).toBeVisible();
       });
 
       // Step 2: Verify card titles under that section
       await step(`Verify card titles in section '${sectionTitle}'`, async () => {
         const cardTitlesLocator = this.page.locator(
-          `//span[normalize-space(text())='${sectionTitle}']/ancestor::div[@class='container-fluid']/following-sibling::div[contains(@class, 'scrollListing')]//h4[contains(@class, 'game-title')]`
+          `//span[normalize-space(text())="${sectionTitle}"]/ancestor::div[@class='container-fluid']/following-sibling::div[contains(@class, 'scrollListing')]//h4[contains(@class, 'game-title')]`
         );
         await expect(cardTitlesLocator.first()).toBeVisible();
 
@@ -204,7 +221,7 @@ export class LoginPage {
       // Step 3: Verify genre under card titles
       await step(`Verify genre in section '${sectionTitle}'`, async () => {
         const genreLocator = this.page.locator(
-          `//span[normalize-space(text())='${sectionTitle}']/ancestor::div[@class='container-fluid']/following-sibling::div[contains(@class, 'scrollListing')]//span[contains(@class, 'gameGenre')]`
+          `//span[normalize-space(text())="${sectionTitle}"]/ancestor::div[@class='container-fluid']/following-sibling::div[contains(@class, 'scrollListing')]//span[contains(@class, 'gameGenre')]`
         );
         await expect(genreLocator.first()).toBeVisible();
 
@@ -221,7 +238,7 @@ export class LoginPage {
       // Step 4: Validate card size (200 x 250)
     await step(`Validate size of each card is 200x250 pixels`, async () => {
       const cardContainers = this.page.locator(
-        `//span[normalize-space(text())='${sectionTitle}']/ancestor::div[contains(@class,'container-fluid')]/following-sibling::div[contains(@class, 'scrollListing')]//div[contains(@style,'position')]`
+        `//span[normalize-space(text())="${sectionTitle}"]/ancestor::div[contains(@class,'container-fluid')]/following-sibling::div[contains(@class, 'scrollListing')]//div[contains(@style,'position')]`
       );
 
       const count = await cardContainers.count();

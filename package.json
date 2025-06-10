@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:qa": "cross-env ENV=qa npx playwright test",
+    "clean:allure": "rimraf allure-results allure-report",
+    "test:qa": "cross-env ENV=qa npx playwright test --headed",
     "test:dev": "cross-env ENV=dev npx playwright test",
-    "test:prod": "cross-env ENV=prod npx playwright test"
+    "test:prod": "cross-env ENV=prod npx playwright test --headed"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "allure-js-commons": "^3.2.2",
     "allure-playwright": "^3.2.2",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "rimraf": "^6.0.1"
   }
 }
