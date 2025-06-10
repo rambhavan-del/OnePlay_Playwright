@@ -4,9 +4,8 @@
   "main": "index.js",
   "scripts": {
     "clean:allure": "rimraf allure-results allure-report",
-    "test:qa": "cross-env ENV=qa npx playwright test --headed",
-    "test:dev": "cross-env ENV=dev npx playwright test",
-    "test:prod": "cross-env ENV=prod npx playwright test --headed"
+    "test:qa": "cross-env ENV=qa npx playwright test",
+    "test:prod": "cross-env ENV=prod npx playwright test"
   },
   "keywords": [],
   "author": "",
