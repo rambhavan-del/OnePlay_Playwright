@@ -41,6 +41,14 @@ pipeline {
             }
         }
 
+        stage('Create Allure Environment File') {
+            steps {
+                bat """
+                echo ENV=${params.ENV} > allure-results\\environment.properties
+                echo BROWSER=chromium >> allure-results\\environment.properties
+                """
+            }
+        }
 
         stage('Generate Allure Report') {
             steps {
