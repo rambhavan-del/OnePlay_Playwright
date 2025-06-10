@@ -36,12 +36,11 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat """
-                echo Running tests for %%ENV%% environment...
-                npm run test:%%ENV%% -- --workers=1
-                """
+                bat "echo Running tests for ${params.ENV} environment..."
+                bat "npm run test:${params.ENV} -- --workers=1"
             }
         }
+
 
         stage('Generate Allure Report') {
             steps {
