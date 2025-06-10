@@ -52,6 +52,10 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'allure-report/**', allowEmptyArchive: true
+
+            // This line enables the Allure Report tab in Jenkins (after plugin installation)
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
         }
     }
+
 }
