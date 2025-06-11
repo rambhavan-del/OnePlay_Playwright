@@ -1,5 +1,14 @@
 {
-  "mobileNumber": "7008833237",
-  "OTP": "1234",
-  "password": "Admin@123"
+    "loginPage": {
+        "mobileNumber": "7008833237",
+        "OTP": "1234",
+        "password": "Admin@123"
+    },
+    "homePage": {
+        "viewMoreCTA": "View More",
+        "homeCTA": "Home",
+        "gamesCTA": "Games",
+        "storeCTA": "Store",
+        "lavelCTA": "Level 1"
+    }
 }

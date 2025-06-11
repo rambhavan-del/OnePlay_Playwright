@@ -64,13 +64,13 @@ export class LoginPage {
 
   async login() {
   await ActionHelper.click(this.loginBtn, 'Click Sign In button');
-  await ActionHelper.type(this.mobileNumberField, testData.mobileNumber, 'Enter mobile number');
+  await ActionHelper.type(this.mobileNumberField, testData.loginPage.mobileNumber, 'Enter mobile number');
 
   if (process.env.ENV === 'qa') {
     await ActionHelper.click(this.getOtpCTA, 'Click Get OTP');
-    await ActionHelper.fillOtpFields(this.otpInputField, testData.OTP, 'Enter OTP digits');
+    await ActionHelper.fillOtpFields(this.otpInputField, testData.loginPage.OTP, 'Enter OTP digits');
   } else if (process.env.ENV === 'prod') {
-    await ActionHelper.type(this.passwordField, testData.password, 'Enter password');
+    await ActionHelper.type(this.passwordField, testData.loginPage.password, 'Enter password');
     await ActionHelper.click(this.continueCTA, 'Click Continue with Password');
   } else {
     throw new Error(`Unsupported ENV: ${process.env.ENV}. Expected 'qa' or 'prod'.`);
