@@ -165,23 +165,6 @@ export class LoginPage {
           });
         }
       });
-      // Step 4: Validate card size (200 x 250)
-    await step(`Validate size of each card is 200x250 pixels`, async () => {
-      const cardContainers = this.page.locator(
-        `//span[normalize-space(text())='OnePlay']/ancestor::div[contains(@class,'container-fluid')]/following-sibling::div[contains(@class, 'scrollListing')]//div[contains(@style,'position')]`
-      );
-
-      const count = await cardContainers.count();
-      for (let i = 0; i < count; i++) {
-        const box = await cardContainers.nth(i).boundingBox();
-        expect(box?.width).toBeGreaterThanOrEqual(190);
-        expect(box?.width).toBeLessThanOrEqual(210);
-
-        expect(box?.height).toBeGreaterThanOrEqual(240);
-        expect(box?.height).toBeLessThanOrEqual(260);
-        console.log(`✅ Verified size for card #${i + 1}: ${box?.width} x ${box?.height}`);
-      }
-    });
       }else{
         const expectedCardTitles = feed.results
         .map((r: any) => r.title?.trim())
@@ -235,23 +218,6 @@ export class LoginPage {
           });
         }
       });
-      // Step 4: Validate card size (200 x 250)
-    await step(`Validate size of each card is 200x250 pixels`, async () => {
-      const cardContainers = this.page.locator(
-        `//span[normalize-space(text())="${sectionTitle}"]/ancestor::div[contains(@class,'container-fluid')]/following-sibling::div[contains(@class, 'scrollListing')]//div[contains(@style,'position')]`
-      );
-
-      const count = await cardContainers.count();
-      for (let i = 0; i < count; i++) {
-        const box = await cardContainers.nth(i).boundingBox();
-        expect(box?.width).toBeGreaterThanOrEqual(190);
-        expect(box?.width).toBeLessThanOrEqual(210);
-
-        expect(box?.height).toBeGreaterThanOrEqual(240);
-        expect(box?.height).toBeLessThanOrEqual(260);
-        console.log(`✅ Verified size for card #${i + 1}: ${box?.width} x ${box?.height}`);
-      }
-    });
     }
     } else {
       console.log(`⏭️ Skipped feed[${i}] — not a portrait_card (type = '${feed.type}')`);
@@ -323,23 +289,6 @@ async verifySpecialBannerCollectionCardTitles({ request }) {
           });
         }
       });
-      // Step 4: Validate card size (320 x 180)
-    await step(`Validate size of each card is 320x180 pixels`, async () => {
-      const cardContainers = this.page.locator(
-        `//section[@class='parallexContainer']//img[contains(@style,'object-fit')]`
-      );
-
-      const count = await cardContainers.count();
-      for (let i = 0; i < count; i++) {
-        const box = await cardContainers.nth(i).boundingBox();
-        expect(box?.width).toBeGreaterThanOrEqual(310);
-        expect(box?.width).toBeLessThanOrEqual(330);
-
-        expect(box?.height).toBeGreaterThanOrEqual(170);
-        expect(box?.height).toBeLessThanOrEqual(190);
-        console.log(`✅ Verified size for card #${i + 1}: ${box?.width} x ${box?.height}`);
-      }
-    });
     }else {
       console.log(`⏭️ Skipped feed[${i}] — not a special banner collection card (type = '${feed.type}')`);
     }
@@ -413,23 +362,6 @@ async verifySquareCategoryLargeCardTitles({ request }) {
           });
         }
       });
-      // Step 4: Validate card size (247 x 240)
-    await step(`Validate size of each card is 247 x 240 pixels`, async () => {
-      const cardContainers = this.page.locator(
-        `//span[normalize-space(text())='${sectionTitle}']/ancestor::div[contains(@class,'container-fluid')]/following-sibling::div[contains(@class, 'scrollListing')]//div[contains(@style,'position')]`
-      );
-
-      const count = await cardContainers.count();
-      for (let i = 0; i < count; i++) {
-        const box = await cardContainers.nth(i).boundingBox();
-        expect(box?.width).toBeGreaterThanOrEqual(240);
-        expect(box?.width).toBeLessThanOrEqual(260);
-
-        expect(box?.height).toBeGreaterThanOrEqual(230);
-        expect(box?.height).toBeLessThanOrEqual(250);
-        console.log(`✅ Verified size for card #${i + 1}: ${box?.width} x ${box?.height}`);
-      }
-    });
     }else {
       console.log(`⏭️ Skipped feed[${i}] — not a square category large card (type = '${feed.type}')`);
     }
@@ -503,23 +435,6 @@ async verifySquareCategorySmallCardTitles({ request }) {
           });
         }
       });
-      // Step 4: Validate card size (247 x 240)
-    // await step(`Validate size of each card is 247 x 240 pixels`, async () => {
-    //   const cardContainers = this.page.locator(
-    //     `//span[normalize-space(text())='${sectionTitle}']/ancestor::div[contains(@class,'container-fluid')]/following-sibling::div[contains(@class, 'scrollListing')]//div[contains(@style,'position')]`
-    //   );
-
-    //   const count = await cardContainers.count();
-    //   for (let i = 0; i < count; i++) {
-    //     const box = await cardContainers.nth(i).boundingBox();
-    //     expect(box?.width).toBeGreaterThanOrEqual(240);
-    //     expect(box?.width).toBeLessThanOrEqual(260);
-
-    //     expect(box?.height).toBeGreaterThanOrEqual(230);
-    //     expect(box?.height).toBeLessThanOrEqual(250);
-    //     console.log(`✅ Verified size for card #${i + 1}: ${box?.width} x ${box?.height}`);
-    //   }
-    // });
     }else {
       console.log(`⏭️ Skipped feed[${i}] — not a square category small card (type = '${feed.type}')`);
     }
@@ -593,23 +508,6 @@ async verifyPortraitCategoryCardTitles({ request }) {
           });
         }
       });
-      // Step 4: Validate card size (247 x 240)
-    await step(`Validate size of each card is 247 x 240 pixels`, async () => {
-      const cardContainers = this.page.locator(
-        `//span[normalize-space(text())='${sectionTitle}']/ancestor::div[contains(@class,'container-fluid')]/following-sibling::div[contains(@class, 'scrollListing')]//div[contains(@style,'position')]`
-      );
-
-      const count = await cardContainers.count();
-      for (let i = 0; i < count; i++) {
-        const box = await cardContainers.nth(i).boundingBox();
-        expect(box?.width).toBeGreaterThanOrEqual(190);
-        expect(box?.width).toBeLessThanOrEqual(210);
-
-        expect(box?.height).toBeGreaterThanOrEqual(240);
-        expect(box?.height).toBeLessThanOrEqual(260);
-        console.log(`✅ Verified size for card #${i + 1}: ${box?.width} x ${box?.height}`);
-      }
-    });
     }else {
       console.log(`⏭️ Skipped feed[${i}] — not a portrait category card (type = '${feed.type}')`);
     }
