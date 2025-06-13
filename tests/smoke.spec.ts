@@ -33,7 +33,7 @@ test('Verify the UI of the Upper half of the Game Details Page', async () => {
     await homePage.clickAndVerifyLeftAndRightArrow();
 });
 
-test.only("Verify Play Now, resume and terminate button",async() =>{
+test("Verify Play Now, resume and terminate button",async() =>{
   await homePage.searchGame();
   await page.waitForTimeout(5000);
   await loginPage.verifyBannerPopup();

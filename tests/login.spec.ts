@@ -26,7 +26,6 @@ test.afterAll(async () => {
 
 test('User can login successfully', async () => {
     await loginPage.validateImageElements();
-    // await page.waitForTimeout(5000);
 });
 
 test('Verify My Portrait card titles', async () => {
