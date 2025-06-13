@@ -41,6 +41,42 @@ export class HomePage {
     return this.page.locator('.card-carousel-img.selectedGame');
   }
 
+  get searchButton(){
+    return this.page.locator(`span.search-btn`);
+  }
+
+  get searchTextField(){
+    return this.page.locator(`input.search-txt`);
+  }
+
+  get counterStrikeGame(){
+    return this.page.locator(`//span[contains(text(), 'Counter-Strike 2')]`);
+  }
+
+  get actionButton(){
+    return this.page.locator("button.action-btn");
+  }
+
+  get terminateButton(){
+    return this.page.locator(`button.transparent-btn`);
+  }
+
+  get saveAndLaunchGameBtn(){
+    return this.page.locator(`//button[normalize-space(text())='Save & Launch Game']`);
+  }
+
+  get resumeButton(){
+    return this.page.locator(`//button[normalize-space(text())='Resume']`);
+  }
+
+  get inlineCheckbox(){
+    return this.page.locator(".form-check-input");
+  }
+
+  get agreeAndContinueButton(){
+    return this.page.locator(`button.customBtnBg`);
+  }
+
   async verifyAllCTA(){
     await step('Verify View More CTA', async () => {
       const viewMoreCTA = await this.viewMoreCTA.textContent();
@@ -115,5 +151,34 @@ async clickAndVerifyLeftAndRightArrow() {
     const afterLeftClickGame = await this.selectedCardCarousel.getAttribute('src');
     expect(afterLeftClickGame).toBe(this.initialGame);
   });
+}
+
+async searchGame(){
+    await this.searchButton.hover();
+    await ActionHelper.fill(this.searchTextField,testData.gameDetailsPage.gameName,"Enter game name in search field");
+    await this.counterStrikeGame.waitFor({ state: 'visible' });
+    await ActionHelper.click(this.counterStrikeGame,"select Counter-Strike 2 from suggestions");
+}
+
+async verifyActionButtonOnGameDetailsPage(){
+    const action = await this.actionButton.textContent();
+    if(action?.trim()==="Play Now"){
+      expect(action?.trim()).toBe("Play Now");
+      await ActionHelper.click(this.actionButton,"Click on Play Now Button");
+      await ActionHelper.click(this.inlineCheckbox,"Check for before you start form checkbox");
+      await ActionHelper.click(this.agreeAndContinueButton,"Click on Agree & Continue button");
+      const saveAndLaunchGame = await this.saveAndLaunchGameBtn.textContent();
+      expect(saveAndLaunchGame?.trim()).toBe("Save & Launch Game");
+      await ActionHelper.click(this.saveAndLaunchGameBtn,"Click on Save & Launch Game button");
+      await this.resumeButton.waitFor({'state':'visible','timeout':200000});
+      const resume = await this.resumeButton.textContent();
+      expect(resume?.trim()).toBe("Resume");
+      const terminate = await this.terminateButton.getAttribute("data");
+      expect(terminate?.trim()).toBe("Terminate");
+    }else if(action?.trim()==="Resume"){
+      expect(action?.trim()).toBe("Resume");
+      const terminate = await this.terminateButton.getAttribute("data");
+      expect(terminate?.trim()).toBe("Terminate");
+    }
 }
 }

@@ -10,5 +10,8 @@
         "gamesCTA": "Games",
         "storeCTA": "Store",
         "lavelCTA": "Level 1"
+    },
+    "gameDetailsPage":{
+        "gameName":"Counter-Strike"
     }
 }

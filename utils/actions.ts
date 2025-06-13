@@ -13,6 +13,13 @@ export class ActionHelper {
   static async type(locator: Locator, text: string, stepDescription: string) {
     await step(stepDescription, async () => {
       await locator.waitFor({ state: 'visible', timeout: 5000 });
+      await locator.type(text);
+    });
+  }
+
+  static async fill(locator: Locator, text: string, stepDescription: string) {
+    await step(stepDescription, async () => {
+      await locator.waitFor({ state: 'visible', timeout: 5000 });
       await locator.fill(text);
     });
   }
